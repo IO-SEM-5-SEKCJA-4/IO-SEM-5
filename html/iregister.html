@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" 
+    />
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+  rel="stylesheet"
+/>
+
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=login"
+/>
+
+<link rel="stylesheet" href="../css/style-registration.css" />
+
+</head>
+<body>
+    <div id="container">
+        <div id="logo">Logo</div>
+        <div id="logo">Register</div>
+        <form action="action.php" method="post" autocomplete="off">
+          <input
+            type="text"
+            name="login"
+            id="login"
+            placeholder="Login"
+            minlength="3"
+            maxlength="30"
+          />
+
+          <input
+          type="firstname"
+          name="firstname"
+          id="firstname"
+          placeholder="First name"
+          minlength="3"
+          maxlength="30"
+          />
+
+          <input
+          type="lastname"
+          name="lastname"
+          id="lastname"
+          placeholder="Last name"
+          minlength="3"
+          maxlength="30"
+          />
+
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            minlength="3"
+            maxlength="30"
+          />
+
+          <input
+            type="verify_password"
+            name="verify_password"
+            id="verify_password"
+            placeholder="Verify password"
+            minlength="3"
+            maxlength="30"
+          />
+
+          <div class="date-selectors">
+            <select id="day" name="day" required>
+              <option value="">Day</option>
+            </select>
+            
+            <select id="month" name="month" required>
+              <option value="">Month</option>
+            </select>
+            
+            <select id="year" name="year" required>
+              <option value="">Year</option>
+            </select>
+          </div>
+    
+         
+    
+      <script>
+        // Generowanie dni (1-31)
+        const daySelect = document.getElementById("day");
+        for (let day = 1; day <= 31; day++) {
+          let option = document.createElement("option");
+          option.value = day;
+          option.textContent = day;
+          daySelect.appendChild(option);
+        }
+    
+        // Generowanie miesięcy (1-12)
+        const monthSelect = document.getElementById("month");
+        const monthNames = [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+        ];
+        monthNames.forEach((month, index) => {
+          let option = document.createElement("option");
+          option.value = index + 1;
+          option.textContent = month;
+          monthSelect.appendChild(option);
+        });
+    
+        // Generowanie lat (np. od 1900 do bieżącego roku)
+        const yearSelect = document.getElementById("year");
+        const currentYear = new Date().getFullYear();
+        for (let year = currentYear; year >= 1900; year--) {
+          let option = document.createElement("option");
+          option.value = year;
+          option.textContent = year;
+          yearSelect.appendChild(option);
+        }
+      </script>
+         
+
+          <a href="index-en.html">
+            <button type="button">
+              <!-- type="submit" -->
+              <span class="material-symbols-outlined"> login </span>
+            </button>
+          </a>
+        </form>
+      </div>
+    </main>
+</body>
+</html>
