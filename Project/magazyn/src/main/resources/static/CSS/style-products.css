@@ -1,0 +1,31 @@
+body {
+    background-color: #020f33;
+    color: #e6ebfa;
+    font-family: "Quicksand", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #2f417a;
+}
+
+.add-product-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #e6ebfa;
+    background-color: #2f417a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-product-button:hover {
+    background-color: #3d549f;
+}
