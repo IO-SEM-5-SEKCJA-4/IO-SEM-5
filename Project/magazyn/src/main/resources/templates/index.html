@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartStack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+          rel="stylesheet"
+  />
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout"
+  />
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=logout"
+  />
+  <!-- live server -->
+  <!-- <link rel="stylesheet" href="../static/CSS/style.css" /> -->
+  <!-- spring boot -->
+  <link rel="stylesheet" href="../CSS/style.css" />
+  <!-- live server -->
+  <!--<script type="module" src="../static/JS/Main.js"></script>-->
+  <!-- spring boot -->
+  <script type="module" src="../main/Main.js"></script>
+</head>
+<body>
+<header>
+  <div id="logo">
+    <!-- live server -->
+    <!--<img src="../static/data/images/images/Logo.v1.png" alt"logo"/>-->
+    <!-- spring boot -->
+    <img src="../data/images/Logo.v1.png" alt="logo"/>
+  </div>
+  <nav>
+    <!--navigacja po stronie-->
+    <ul id="nav-list">
+      <li class="nav-list-item">
+        <a th:href="@{/dodawanie}">Dodaj Produkt</a>
+      </li>
+      <li class="nav-list-item">
+        <a th:href="@{/strefy}">Strefy</a>
+      </li>
+      <li class="nav-list-item">
+        <a th:href="@{/uzytkownicy}">Użytkownicy</a>
+      </li>
+    </ul>
+    <!-- tutaj dodać to do wylogowywania-->
+    <div id="logging" th:if="${isLoggedIn}">
+      <a id="logging-off" href="login">
+        <span class="material-symbols-outlined" th:href="@{/logout}">
+          logout
+        </span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<div id="search-bar-container">
+  <div id="search-controls">
+    <input type="text" 
+           id="search-input" 
+           placeholder="Wyszukaj produkt..." 
+           onkeyup="searchProducts()">
+    
+    <div id="filters">
+        <select id="sort-select" onchange="sortProducts(this.value)">
+          <option value="nameAsc">Nazwa (A-Z)</option>
+          <option value="nameDesc">Nazwa (Z-A)</option>
+          <option value="dateAsc">Data (rosnąco)</option>
+          <option value="dateDesc">Data (malejąco)</option>
+          <option value="priceAsc">Cena (rosnąco)</option>
+          <option value="priceDesc">Cena (malejąco)</option>
+        </select>
+
+        <select id="filter-select" onchange="filterProducts(this.value)">
+            <option value="all">Wszystkie produkty</option>
+            <option value="expired">Przeterminowane</option>
+            <option value="valid">Ważne</option>
+        </select>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div id="container">
+    <!--głowna czesc strony-->
+  </div>
+</main>
+<footer>
+  <!--dolna stopka - jakies informacje o tworcach
+  i jakies tam informacje
+-->
+  information about us and e.g. regulations
+</footer>
+</body>
+</html>
