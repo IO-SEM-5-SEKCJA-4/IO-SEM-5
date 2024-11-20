@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Strefy magazynowe</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Strefy magazynowe</h1>
+
+    <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <span th:text="${successMessage}"></span>
+    </div>
+
+    <a href="/zones/add" class="btn btn-primary mb-3">Dodaj nową strefę</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nazwa strefy</th>
+            <th>Maksymalna pojemność</th>
+            <th>Aktualna waga</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="zone : ${zones}">
+            <td th:text="${zone.name}"></td>
+            <td th:text="${#numbers.formatDecimal(zone.maxCapacity, 0, 2)} + ' kg'"></td>
+            <td th:text="${#numbers.formatDecimal(zone.currentWeight, 0, 2)} + ' kg'"></td>
+            <td>
+                <a th:href="@{/zones/details/{id}(id=${zone.id})}" class="btn btn-info btn-sm">Szczegóły</a>
+                <a th:href="@{/zones/edit/{id}(id=${zone.id})}" class="btn btn-warning btn-sm">Edytuj</a>
+                <a th:href="@{/zones/delete/{id}(id=${zone.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Czy na pewno chcesz usunąć tę strefę?')">Usuń</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
