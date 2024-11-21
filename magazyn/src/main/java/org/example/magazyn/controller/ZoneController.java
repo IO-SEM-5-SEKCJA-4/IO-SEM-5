@@ -2,13 +2,17 @@ package org.example.magazyn.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.magazyn.dto.ZoneDto;
+import org.example.magazyn.entity.Product;
 import org.example.magazyn.entity.Zone;
 import org.example.magazyn.service.ZoneService;
+import org.example.magazyn.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -16,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ZoneController {
 
     private final ZoneService zoneService;
+    private final ProductService productService;
 
     @GetMapping
     public String getZones(Model model) {
@@ -99,4 +104,56 @@ public class ZoneController {
         }
         return "redirect:/zones";
     }
+
+    @GetMapping("/assignProduct/{zoneId}")
+    public String showAssignProductForm(@PathVariable Long zoneId, Model model) {
+        Zone zone = zoneService.getZoneById(zoneId);
+        List<Product> availableProducts = productService.findByZoneIsNull();
+
+        model.addAttribute("zone", zone);
+        model.addAttribute("products", availableProducts);
+
+        return "assignProduct";
+    }
+
+    @PostMapping("/assignProduct")
+    public String assignProductToZone(@RequestParam Long zoneId,
+                                      @RequestParam Long productId,
+                                      RedirectAttributes redirectAttributes) {
+        try {
+            zoneService.assignProductToZone(productId, zoneId);
+            redirectAttributes.addFlashAttribute("successMessage", "Produkt został przypisany do strefy");
+            return "redirect:/zones";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/assignProduct" + zoneId;
+        }
+    }
+
+    @GetMapping("/removeProduct/{zoneId}")
+    public String showRemoveProductForm(@PathVariable Long zoneId, Model model) {
+        try {
+            Zone zone = zoneService.getZoneById(zoneId);
+            model.addAttribute("zone", zone);
+            return "removeProduct";
+        } catch (Exception e) {
+            return "redirect:/zones";
+        }
+    }
+
+    @GetMapping("/removeProduct/{zoneId}/{productId}")
+    public String removeProductFromZone(@PathVariable Long zoneId,
+                                        @PathVariable Long productId,
+                                        RedirectAttributes redirectAttributes) {
+        try {
+            zoneService.removeProductFromZone(productId, zoneId);
+            redirectAttributes.addFlashAttribute("successMessage",
+                    "Produkt został usunięty ze strefy");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage",
+                    "Nie można usunąć produktu ze strefy: " + e.getMessage());
+        }
+        return "redirect:/zones/removeProduct/" + zoneId;
+    }
+
 }

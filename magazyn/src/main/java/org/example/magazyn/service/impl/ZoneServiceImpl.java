@@ -74,26 +74,25 @@ public class ZoneServiceImpl implements ZoneService {
     }
 
     @Override
-    @Transactional
-    public Product removeProductFromZone(Long productId) throws Exception {
+    public void removeProductFromZone(Long productId, Long zoneId) {
+        Zone zone = getZoneById(zoneId);
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Produkt nie znaleziony"));
 
-        // Sprawdzenie czy produkt jest przypisany do strefy
-        if (product.getZone() == null) {
-            throw new Exception("Produkt nie jest przypisany do żadnej strefy");
+        if (!product.getZone().getId().equals(zoneId)) {
+            throw new RuntimeException("Produkt nie należy do tej strefy");
         }
 
-        // Aktualizacja wagi strefy
-        Zone zone = product.getZone();
-        double totalProductWeight = product.getWeight() * product.getQuantity();
-        zone.setCurrentWeight(zone.getCurrentWeight() - totalProductWeight);
+        // Update zone's current weight
+        double productTotalWeight = product.getWeight() * product.getQuantity();
+        zone.setCurrentWeight(zone.getCurrentWeight() - productTotalWeight);
 
-        // Usunięcie produktu ze strefy
+        // Remove product from zone
         product.setZone(null);
 
+        // Save changes
+        productRepository.save(product);
         zoneRepository.save(zone);
-        return productRepository.save(product);
     }
 
     @Override

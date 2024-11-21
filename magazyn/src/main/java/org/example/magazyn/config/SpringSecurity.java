@@ -29,9 +29,10 @@ public class SpringSecurity {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/", "/login", "/register/**").permitAll()
-                        .requestMatchers("/products", "/zones").hasAnyRole("USER", "WAREHOUSEMAN", "MANAGER", "ADMIN")
-                        .requestMatchers("/products/add", "/zones", "/zones/add").hasAnyRole("ADMIN", "WAREHOUSEMAN", "MANAGER")
-                        .requestMatchers("/users").hasAnyRole("ADMIN", "MANAGER")
+                        .requestMatchers("/products").hasAnyRole("USER", "WAREHOUSEMAN", "MANAGER", "ADMIN")
+                        .requestMatchers("/products/add/**", "/products/edit/**", "/products/delete/**").hasAnyRole("ADMIN", "WAREHOUSEMAN", "MANAGER")
+                        .requestMatchers("/zones", "/zones/add/**", "/zones/edit/**", "/zones/delete/", "/zones/details/**", "/zones/assignProduct/**", "/zones/removeProduct/**").hasAnyRole("ADMIN", "WAREHOUSEMAN", "MANAGER")
+                        .requestMatchers("/users", "/updateRoles").hasAnyRole("ADMIN", "MANAGER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

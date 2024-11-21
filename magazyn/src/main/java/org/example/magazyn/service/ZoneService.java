@@ -11,7 +11,7 @@ public interface ZoneService {
     List<Zone> getAllZones();
     Zone getZoneById(Long id);
     Product assignProductToZone(Long productId, Long zoneId) throws Exception;
-    Product removeProductFromZone(Long productId) throws Exception;
+    void removeProductFromZone(Long productId, Long zoneId);
     List<Product> getProductsInZone(Long zoneId);
     Zone updateZone(Long zoneId, ZoneDto zoneDto);
     void deleteZone(Long id);

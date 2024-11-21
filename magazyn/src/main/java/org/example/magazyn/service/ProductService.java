@@ -19,4 +19,7 @@ public interface ProductService {
     void deleteProduct(Long id);
 
     Product updateProduct(Long id, ProductDto productDto) throws IOException;
+
+    List<Product> findByZoneIsNull();
+
 }

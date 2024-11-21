@@ -45,5 +45,38 @@ public class ProductController {
         return "redirect:/products";
     }
 
+    @GetMapping("/products/edit/{id}")
+    public String showEditProductForm(@PathVariable Long id, Model model) {
+        Product product = productService.getProductById(id);
+        ProductDto productDto = new ProductDto();
+
+        productDto.setName(product.getName());
+        productDto.setCategory(product.getCategory());
+        productDto.setDescription(product.getDescription());
+        productDto.setPrice(product.getPrice());
+        productDto.setWeight(product.getWeight());
+        productDto.setBrand(product.getBrand());
+        productDto.setQuantity(product.getQuantity());
+
+        model.addAttribute("productDto", productDto);
+        model.addAttribute("productId", id);
+        return "editProduct";
+    }
+
+    @PostMapping("/products/edit/{id}")
+    public String updateProduct(
+            @PathVariable Long id,
+            @Valid @ModelAttribute("productDto") ProductDto productDto
+    ) throws IOException {
+        productService.updateProduct(id, productDto);
+        return "redirect:/products";
+    }
+
+    @GetMapping("/products/delete/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return "redirect:/products";
+    }
+
 
 }

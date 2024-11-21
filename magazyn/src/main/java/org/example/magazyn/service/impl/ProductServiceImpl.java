@@ -30,6 +30,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findByZoneIsNull() {
+        return productRepository.findByZoneIsNull();
+    }
+
+    @Override
     public List<Product> getProductsByUser(User user) {
         return productRepository.findByUser(user);
     }

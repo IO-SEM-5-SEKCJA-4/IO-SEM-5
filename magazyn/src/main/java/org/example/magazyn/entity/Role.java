@@ -1,6 +1,5 @@
 package org.example.magazyn.entity;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,12 +10,16 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-
+@NoArgsConstructor
 @Entity
 @Table(name = "roles")
 public class Role {
+    public static final String ROLE_USER = "ROLE_USER";
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String ROLE_WAREHOUSEMAN = "ROLE_WAREHOUSEMAN";
+    public static final String ROLE_MANAGER = "ROLE_MANAGER";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

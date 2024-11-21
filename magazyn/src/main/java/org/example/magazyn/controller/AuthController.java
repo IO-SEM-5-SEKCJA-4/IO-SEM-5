@@ -10,8 +10,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -65,5 +68,21 @@ public class AuthController {
         List<UserDto> users = userService.findAllUsers();
         model.addAttribute("users", users);
         return "users";
+    }
+
+    @PostMapping("/updateRoles")
+    public String updateRoles(@RequestParam Long userId,
+                              @RequestParam(required = false) List<String> roles,
+                              RedirectAttributes redirectAttributes) {
+        try {
+            if (roles == null) {
+                roles = new ArrayList<>();
+            }
+            userService.updateUserRoles(userId, roles);
+            redirectAttributes.addFlashAttribute("successMessage", "Roles updated successfully");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Error updating roles: " + e.getMessage());
+        }
+        return "redirect:/users";
     }
 }
