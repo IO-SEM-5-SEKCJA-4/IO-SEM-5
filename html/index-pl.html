@@ -20,16 +20,28 @@
     />
     <link rel="stylesheet" href="../css/style.css" />
     <script type="module" src="../js/Main.js"></script>
+    
   </head>
   <body>
     <header>
-      <div id="logo">LOGO</div>
+      <div id="logo">
+        <!-- live server -->
+        <img src="D:\Repozytoria\IOTest\Jonasz-Branch\data\images\Logo.v1.png" alt="logo"/>
+        <!-- spring boot -->
+        <!-- <img src="../data/images/Logo.v1.png" alt="logo"/> -->
+      </div>
       <nav>
-        <!--nawigacja po stronie-->
+        <!-- Nawigacja po stronie -->
         <ul id="nav-list">
-          <li class="nav-list-item"><a href="index-pl-zone.html">Strefy</a></li>
-          <li class="nav-list-item"><a href="index-pl-products.html">Produkty</a></li>
-          <li class="nav-list-item"><a href="index-pl-users.html">Użytkownicy</a></li>
+          <li class="nav-list-item">
+            <button onclick="window.location.href='index-pl-zone.html'">Strefy</button>
+          </li>
+          <li class="nav-list-item">
+            <button onclick="window.location.href='index-pl-products.html'">Produkty</button>
+          </li>
+          <li class="nav-list-item">
+            <button onclick="window.location.href='index-pl-users.html'">Użytkownicy</button>
+          </li>
         </ul>
       </nav>
       <div id="language">
@@ -43,16 +55,92 @@
         >
       </div>
     </header>
+
+    <div id="search-bar-container">
+      <div id="search-controls">
+        <input type="text" 
+               id="search-input" 
+               placeholder="Wyszukaj produkt/firmę/lokalizację..." 
+               onkeyup="searchProducts()">
+        
+        <div id="filters">
+            <select id="sort-select" onchange="sortProducts(this.value)">
+              <option value="nameAsc">Nazwa (A-Z)</option>
+              <option value="nameDesc">Nazwa (Z-A)</option>
+              <option value="dateAsc">Data (rosnąco)</option>
+              <option value="dateDesc">Data (malejąco)</option>
+              <option value="priceAsc">Cena (rosnąco)</option>
+              <option value="priceDesc">Cena (malejąco)</option>
+            </select>
+    
+            <select id="filter-select" onchange="filterProducts(this.value)">
+                <option value="all">Wszystkie produkty</option>
+                <option value="expired">Przeterminowane</option>
+                <option value="valid">Ważne</option>
+            </select>
+        </div>
+      </div>
+    </div>
+
     <main>
       <div id="container">
         <!--główna część strony-->
       </div>
     </main>
+
+
+<!-- Przycisk rozwijania okienka -->
+<div id="toggle-button" class="toggle-button">☰</div>
+
+<!-- Rozwijane okienko -->
+<div id="side-panel" class="side-panel">
+  <h2>Dziennik zdarzeń</h2>
+  <!-- Kontener na logi -->
+  <div class="log-container">
+    <!-- Log 1 -->
+    <div class="log-entry">
+      <span class="log-time">12:00</span>
+      <span class="log-message">System uruchomiony</span>
+    </div>
+    <!-- Log 2 -->
+    <div class="log-entry">
+      <span class="log-time">12:05</span>
+      <span class="log-message">Użytkownik zalogowany</span>
+    </div>
+    <!-- Log 3 -->
+    <div class="log-entry">
+      <span class="log-time">12:10</span>
+      <span class="log-message">Dodano nowy produkt</span>
+    </div>
+    <!-- Log 4 -->
+    <div class="log-entry">
+      <span class="log-time">12:15</span>
+      <span class="log-message">Wylogowanie użytkownika</span>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Przycisk rozwijania okienka
+    <div id = "toggle-button">
+      <button class="toggle-button">☰</button>
+  </div>
+  
+
+     Rozwijane okienko 
+    <div id="side-panel" class="side-panel">
+      <h2>Panel boczny</h2>
+      <p>Tu możesz umieścić różne treści lub elementy.</p>
+    </div> -->
+
+
     <footer>
       <!--dolna stopka - jakieś informacje o twórcach
       i jakieś tam informacje
     -->
       informacje o nas oraz np. regulaminy
     </footer>
+  
+    <script src="../js/togglePanel.js"></script>
   </body>
 </html>

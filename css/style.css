@@ -55,39 +55,75 @@ nav {
   align-items: center;
 }
 
+/* Kontener listy nawigacyjnej */
 #nav-list {
-  list-style: none;
-  display: flex;
+  list-style: none; /* Usuń punkty listy */
+  padding: 0;
+  margin: 0;
+  display: flex; /* Wyświetlaj elementy obok siebie */
+  gap: 10px; /* Odstęp między elementami */
 }
 
+/* Pojedynczy element listy */
 .nav-list-item {
-  margin-right: 10px;
+  margin: 0;
+}
+
+/* Styl przycisków nawigacyjnych */
+.nav-list-item button {
+  background-color: #2f417a; /* Kolor tła */
+  color: #e6ebfa; /* Kolor tekstu */
+  border: none; /* Usuń obramowanie */
+  padding: 10px 20px; /* Odstęp wewnętrzny */
+  border-radius: 5px; /* Zaokrąglone rogi */
+  font-size: 16px;
+  cursor: pointer; /* Rączka na hover */
+  transition: background-color 0.3s ease; /* Płynna zmiana koloru tła */
+}
+
+/* Efekt na hover */
+.nav-list-item button:hover {
+  background-color: #3d549f; /* Jaśniejszy kolor tła */
 }
 
 
 #search-bar-container {
   position: fixed;
-  top: 80px; /* Position directly below the header */
+  top: 80px;
   width: 100%;
   background-color: #ffffff;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adds shadow effect */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   padding: 10px 20px;
   z-index: 999;
 }
 
-
-#search-bar {
-  width: 25%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 16px;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 410px;
-  box-sizing: border-box;
-  margin-left: 33%;
+#search-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
 }
 
+#filters {
+  display: flex;
+  gap: 10px;
+}
+
+#sort-select, #filter-select {
+  padding: 8px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+#search-input {
+  width: 300px;
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
 #language {
   background-color: #2f417a;
   color: #e6ebfa;
@@ -122,6 +158,121 @@ nav {
   color: #e6ebfa;
   padding: 5px;
 }
+
+/* Przycisk rozwijania */
+#toggle-button {
+  position: fixed;
+  top: 50%; /* Wyśrodkowanie względem ekranu */
+  transform: translateY(-50%); /* Korekta dla wyśrodkowania */
+  right: 0; /* Przycisk przy prawej krawędzi ekranu */
+  background-color: #2f417a;
+  color: white;
+  font-size: 30px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px; /* Wyśrodkowanie tekstu w pionie */
+  cursor: pointer;
+  z-index: 1001; /* Wyższy niż panel */
+  border-radius: 5px 0 0 5px;
+  box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Panel boczny */
+.side-panel {
+  position: fixed;
+  top: 50%; /* Wyśrodkowanie panelu w pionie */
+  transform: translateY(-50%); /* Korekta wyśrodkowania */
+  right: -300px; /* Ukryty poza ekranem */
+  width: 300px;
+  height: 400px; /* Skrócona wysokość panelu */
+  background-color: #2f417a;
+  color: white;
+  padding: 20px;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
+  transition: right 0.3s ease; /* Płynne przesuwanie */
+  z-index: 1000;
+  border-radius: 10px 0 0 10px;
+  overflow: hidden; /* Ukrycie zawartości wychodzącej poza panel */
+}
+
+/* Gdy panel się rozwija */
+.side-panel.open {
+  right: 0; /* Panel przesuwa się na ekran */
+}
+
+/* Kontener z informacjami */
+.info-container {
+  max-height: 300px; /* Maksymalna wysokość obszaru przewijania */
+  overflow-y: auto; /* Pionowe przewijanie */
+  margin-top: 10px; /* Odstęp od nagłówka */
+  padding-right: 10px; /* Odstęp od prawej krawędzi */
+  scrollbar-width: thin; /* Wąski pasek przewijania dla Firefox */
+  scrollbar-color: #93a2cf #2f417a; /* Kolory paska przewijania dla Firefox */
+}
+
+/* Pasek przewijania dla Chrome, Edge i Safari */
+.info-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.info-container::-webkit-scrollbar-thumb {
+  background-color: #93a2cf; /* Kolor uchwytu paska przewijania */
+  border-radius: 4px;
+}
+
+.info-container::-webkit-scrollbar-track {
+  background-color: #2f417a; /* Tło paska przewijania */
+}
+
+/* Kontener na logi */
+.log-container {
+  max-height: 300px; /* Maksymalna wysokość pola przewijania */
+  overflow-y: auto; /* Włączenie przewijania w pionie */
+  padding-right: 10px;
+  scrollbar-width: thin; /* Wąski pasek przewijania dla Firefox */
+  scrollbar-color: #93a2cf #2f417a; /* Kolory paska przewijania dla Firefox */
+}
+
+/* Pasek przewijania dla Chrome, Edge i Safari */
+.log-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.log-container::-webkit-scrollbar-thumb {
+  background-color: #93a2cf; /* Kolor uchwytu paska przewijania */
+  border-radius: 4px;
+}
+
+.log-container::-webkit-scrollbar-track {
+  background-color: #2f417a; /* Tło paska przewijania */
+}
+
+/* Styl pojedynczego wpisu */
+.log-entry {
+  display: flex; /* Układ w linii */
+  justify-content: space-between; /* Odstępy między czasem a wiadomością */
+  align-items: center; /* Wyśrodkowanie w pionie */
+  background-color: #93a2cf; /* Tło wpisu */
+  color: #e6ebfa; /* Kolor tekstu */
+  padding: 10px;
+  margin-bottom: 8px; /* Odstęp między wpisami */
+  border-radius: 5px; /* Zaokrąglone rogi */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Delikatny cień */
+}
+
+/* Czas wpisu */
+.log-time {
+  font-weight: bold;
+  color: #e6ebfa;
+  margin-right: 10px;
+}
+
+/* Wiadomość wpisu */
+.log-message {
+  flex-grow: 1; /* Wiadomość zajmuje pozostałą przestrzeń */
+}
+
 
 main {
   background-color: #5b6ea6;
