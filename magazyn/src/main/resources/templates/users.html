@@ -99,19 +99,17 @@
                         <span th:text="${user.email}"></span>
                     </td>
                     <td>
-                        <span th:each="role : ${user.roles}"
-                              th:text="${role}" class="badge bg-primary role-badge">
-                        </span>
-
+                        <span th:text="${#strings.replace(user.role, 'ROLE_', '')}" class="badge bg-primary role-badge"></span>
                     </td>
                     <td>
                         <button type="button"
                                 class="btn btn-primary btn-edit"
                                 data-bs-toggle="modal"
                                 data-bs-target="#editRolesModal"
-                                th:attr="data-user-id=${user.id},data-user-roles=${#strings.listJoin(user.roles, ',')}">
+                                th:attr="data-user-id=${user.id},
+                                        data-user-role=${user.role}">
                             <i class="bi bi-pencil-square me-1"></i>
-                            Edit Roles
+                            Edit Role
                         </button>
                     </td>
                 </tr>
@@ -134,27 +132,27 @@
             <form id="editRolesForm" th:action="@{/updateRoles}" method="post">
                 <div class="modal-body">
                     <input type="hidden" id="userId" name="userId">
-                    <div class="role-checkboxes">
+                    <div class="role-radio">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="roles" value="ROLE_USER" id="roleUser">
+                            <input class="form-check-input" type="radio" name="roles" value="ROLE_USER" id="roleUser">
                             <label class="form-check-label" for="roleUser">
                                 <i class="bi bi-person me-2"></i>User
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="roles" value="ROLE_ADMIN" id="roleAdmin">
+                            <input class="form-check-input" type="radio" name="roles" value="ROLE_ADMIN" id="roleAdmin">
                             <label class="form-check-label" for="roleAdmin">
                                 <i class="bi bi-shield-fill me-2"></i>Admin
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="roles" value="ROLE_WAREHOUSEMAN" id="roleWarehouseman">
+                            <input class="form-check-input" type="radio" name="roles" value="ROLE_WAREHOUSEMAN" id="roleWarehouseman">
                             <label class="form-check-label" for="roleWarehouseman">
                                 <i class="bi bi-box-seam me-2"></i>Warehouseman
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="roles" value="ROLE_MANAGER" id="roleManager">
+                            <input class="form-check-input" type="radio" name="roles" value="ROLE_MANAGER" id="roleManager">
                             <label class="form-check-label" for="roleManager">
                                 <i class="bi bi-briefcase me-2"></i>Manager
                             </label>
@@ -211,33 +209,23 @@
 
         // Handle role editing
         const editRolesModal = document.getElementById('editRolesModal');
-        editRolesModal.addEventListener('show.bs.modal', function (event) {
-            const button = event.relatedTarget;
-            const userId = button.getAttribute('data-user-id');
-            const userRoles = button.getAttribute('data-user-roles');
-
-            console.log('User Roles:', userRoles); // Debugging output to check roles
-
-            // Set user ID in form
-            editRolesModal.querySelector('#userId').value = userId;
-
-            // Reset all checkboxes
-            editRolesModal.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = false;
-            });
-
-            // Check appropriate role checkboxes
-            if (userRoles) {
-                const roles = userRoles.split(',').map(role => role.trim());
-                console.log('Parsed Roles:', roles); // Debugging parsed roles
-                roles.forEach(role => {
-                    const checkbox = editRolesModal.querySelector(`input[value="${role}"]`);
-                    if (checkbox) {
-                        checkbox.checked = true;
-                    }
-                });
-            }
-        });
+        editRolesModal.addEventListener('show.bs.modal', function(event) {
+        // Pobierz przycisk, który wywołał modal
+        const button = event.relatedTarget;
+        
+        // Pobierz dane z atrybutów data-*
+        const userId = button.getAttribute('data-user-id');
+        const userRole = button.getAttribute('data-user-role');
+        
+        // Ustaw userId w ukrytym polu formularza
+        this.querySelector('#userId').value = userId;
+        
+        // Znajdź i zaznacz odpowiedni przycisk radio
+        const radioButton = this.querySelector(`input[type="radio"][value="${userRole}"]`);
+        if (radioButton) {
+            radioButton.checked = true;
+        }
+    });
     });
 </script>
 </body>
