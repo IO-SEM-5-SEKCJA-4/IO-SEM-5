@@ -52,6 +52,12 @@
                               th:text="${product.zone != null ? product.zone.name : 'Unassigned'}">
                         </span>
                     </div>
+                    <div class="text-center mb-3">
+                        <img th:src="@{${product.imagePath}}" 
+                             class="img-fluid rounded" 
+                             alt="Product Image"
+                             style="max-height: 200px; object-fit: contain;">
+                    </div>
                     <ul class="list-group list-group-flush mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <span class="text-muted">Category</span>
