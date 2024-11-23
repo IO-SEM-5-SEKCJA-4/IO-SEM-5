@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Product Inventory</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function filterProducts() {
+            const searchInput = document.getElementById('searchInput');
+            const filter = searchInput.value.toLowerCase();
+            const products = document.getElementsByClassName('product-item');
+
+            Array.from(products).forEach(product => {
+                const productName = product.getAttribute('data-product-name');
+                if (productName.includes(filter)) {
+                    product.style.display = '';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <!-- Navigation Bar -->
@@ -35,14 +51,24 @@
             </a>
         </div>
     </div>
-
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <input type="text" 
+                   id="searchInput" 
+                   class="form-control" 
+                   placeholder="Wyszukaj produkt..."
+                   oninput="filterProducts()">
+        </div>
+    </div>
     <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
         <span th:text="${successMessage}"></span>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        <div class="col" th:each="product : ${products}">
+        <div class="col product-item" 
+            th:each="product : ${products}" 
+            th:data-product-name="${product.name.toLowerCase()}">
             <div class="card h-100 shadow-sm border-0">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
