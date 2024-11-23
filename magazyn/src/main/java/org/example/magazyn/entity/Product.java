@@ -1,7 +1,5 @@
 package org.example.magazyn.entity;
 
-import org.example.magazyn.entity.User;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

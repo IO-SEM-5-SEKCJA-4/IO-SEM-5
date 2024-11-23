@@ -115,6 +115,9 @@ public class ProductServiceImpl implements ProductService {
                 .format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
 
         String originalFileName = file.getOriginalFilename();
+        if (originalFileName == null) {
+            originalFileName = "unnamed_file";
+        }
         String cleanFileName = originalFileName
                 .replaceAll("\\s+", "_")
                 .replaceAll("[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]", "_")
