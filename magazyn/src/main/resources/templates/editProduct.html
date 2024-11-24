@@ -53,48 +53,48 @@
         </div>
         <form th:action="@{/products/edit/{id}(id=${productId})}" th:object="${productDto}" method="post" enctype="multipart/form-data" class="needs-validation mt-3 w-50" novalidate>
             <div class="mb-2">
-                <label for="name" class="form-label pb-1">Name:</label>
+                <label for="name" class="form-label pb-1">Nazwa:</label>
                 <input type="text" id="name" th:field="*{name}" class="form-control" required>
-                <div class="invalid-feedback">Please enter the product name.</div>
+                <div class="invalid-feedback">Wpisz nazwę produktu.</div>
             </div>
             <div class="mb-2">
-                <label for="category" class="form-label pb-1">Category:</label>
+                <label for="category" class="form-label pb-1">Kategoria:</label>
                 <input type="text" id="category" th:field="*{category}" class="form-control" required>
-                <div class="invalid-feedback">Please enter the product category.</div>
+                <div class="invalid-feedback">Wpisz kategorię produktu.</div>
             </div>
             <div class="mb-2">
-                <label for="description" class="form-label pb-1">Description:</label>
+                <label for="description" class="form-label pb-1">Opis:</label>
                 <textarea id="description" th:field="*{description}" class="form-control" required></textarea>
-                <div class="invalid-feedback">Please provide a description.</div>
+                <div class="invalid-feedback">Wpisz opis produktu.</div>
             </div>
             <div class="mb-2">
-                <label for="price" class="form-label pb-1">Price:</label>
+                <label for="price" class="form-label pb-1">Cena:</label>
                 <input type="number" id="price" th:field="*{price}" step="0.01" class="form-control" required>
-                <div class="invalid-feedback">Please enter the product price.</div>
+                <div class="invalid-feedback">Wpisz cenę produktu.</div>
             </div>
             <div class="mb-2">
-                <label for="weight" class="form-label pb-1">Weight:</label>
+                <label for="weight" class="form-label pb-1">Waga:</label>
                 <input type="number" id="weight" th:field="*{weight}" step="0.01" class="form-control" required>
-                <div class="invalid-feedback">Please enter the product weight.</div>
+                <div class="invalid-feedback">Wpisz wagę produktu.</div>
             </div>
             <div class="mb-2">
-                <label for="brand" class="form-label pb-1">Brand:</label>
+                <label for="brand" class="form-label pb-1">Marka:</label>
                 <input type="text" id="brand" th:field="*{brand}" class="form-control" required>
-                <div class="invalid-feedback">Please enter the product brand.</div>
+                <div class="invalid-feedback">Wpisz markę produktu.</div>
             </div>
             <div class="mb-2">
-                <label for="quantity" class="form-label pb-1">Quantity:</label>
+                <label for="quantity" class="form-label pb-1">Ilość:</label>
                 <input type="number" id="quantity" th:field="*{quantity}" class="form-control" required>
-                <div class="invalid-feedback">Please specify the quantity.</div>
+                <div class="invalid-feedback">Wpisz ilość produktu.</div>
             </div>
             <div class="mb-2">
-                <label for="image" class="form-label pb-1">Product Image (optional):</label>
+                <label for="image" class="form-label pb-1">Zdjęcie produktu:</label>
                 <input type="file" id="image" name="image" accept="image/*" class="form-control">
             </div>
             <br/>
             <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Update Product</button>
-                <a href="/products" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                <a href="/products" class="btn btn-secondary">Anuluj</a>
             </div>
         </form>
     </div>

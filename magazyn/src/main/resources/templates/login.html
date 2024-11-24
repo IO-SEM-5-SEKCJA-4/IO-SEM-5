@@ -57,15 +57,15 @@
     <div class="col-md-6 offset-md-3">
 
       <div th:if="${param.error}">
-        <div class="alert alert-danger">Invalid Email or Password</div>
+        <div class="alert alert-danger">Nieprawidłowy email lub hasło</div>
       </div>
       <div th:if="${param.logout}">
-        <div class="alert alert-success"> You have been logged out.</div>
+        <div class="alert alert-success">Wylogowano pomyślnie</div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <h2 class="text-center">Login Form</h2>
+          <h2 class="text-center">Login</h2>
         </div>
         <div class="card-body">
           <form
@@ -75,30 +75,30 @@
                   class="form-horizontal"
           >
             <div class="form-group mb-3">
-              <label class="control-label"> Email</label>
+              <label class="control-label">Email</label>
               <input
                       type="text"
                       id="username"
                       name="username"
                       class="form-control"
-                      placeholder="Enter email address"
+                      placeholder="Wpisz adres email"
               />
             </div>
 
             <div class="form-group mb-3">
-              <label class="control-label"> Password</label>
+              <label class="control-label">Hasło</label>
               <input
                       type="password"
                       id="password"
                       name="password"
                       class="form-control"
-                      placeholder="Enter password"
+                      placeholder="Wpisz hasło"
               />
             </div>
             <div class="form-group d-flex justify-content-between align-items-center">
-              <button type="submit" class="btn btn-primary">Submit</button>
-              <span> Not registered ?
-                  <a th:href="@{/register}">Register/Signup here</a>
+              <button type="submit" class="btn btn-primary">Login</button>
+              <span> Nie zarejestrowany?
+                  <a th:href="@{/register}">Zarejestruj się tutaj</a>
               </span>
           </div>
           </form>
