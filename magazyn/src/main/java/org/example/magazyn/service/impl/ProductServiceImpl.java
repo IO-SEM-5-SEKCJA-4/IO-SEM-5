@@ -22,7 +22,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    private final String UPLOAD_DIRECTORY = "uploads/products";
+    private final String UPLOAD_DIRECTORY = "magazyn/uploads/products";
 
     @Override
     public List<Product> getAllProducts() {
@@ -102,7 +102,7 @@ public class ProductServiceImpl implements ProductService {
     private void handleProductImage(Product product, MultipartFile image) throws IOException {
         String fileName = saveImageToFileSystem(image);
         product.setImageName(fileName);
-        product.setImagePath("/uploads/products/" + fileName);
+        product.setImagePath("magazyn/uploads/products/" + fileName);
     }
 
     private String saveImageToFileSystem(MultipartFile file) throws IOException {
@@ -115,6 +115,9 @@ public class ProductServiceImpl implements ProductService {
                 .format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
 
         String originalFileName = file.getOriginalFilename();
+        if (originalFileName == null) {
+            originalFileName = "unnamed_file";
+        }
         String cleanFileName = originalFileName
                 .replaceAll("\\s+", "_")
                 .replaceAll("[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]", "_")

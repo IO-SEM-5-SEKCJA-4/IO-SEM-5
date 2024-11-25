@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -16,15 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 public class UserDto {
     private Long id;
-    @NotEmpty
+    @NotEmpty(message = "Imie nie powinno być puste")
     private String firstName;
-    @NotEmpty
+    @NotEmpty(message = "Naswisko nie powinno być puste")
     private String lastName;
-    @NotEmpty(message = "Email should not be empty")
+    @NotEmpty(message = "Email nie powinien być pusty")
     @Email
     private String email;
-    @NotEmpty(message = "Password should not be empty")
+    @NotEmpty(message = "Hasło nie powinno być puste")
     private String password;
-    private List<String> roles = new ArrayList<>();
-
+    private String role;
 }

@@ -1,40 +1,58 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Strefy magazynowe</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+              background-color: #f5f5f5;
+        }
+    </style>
 </head>
 <body>
-<div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">Magazyn</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <a class="navbar-brand" th:href="@{/}">Magazyn</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/zones">Strefy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/products">Produkty</a>
-                    </li>
-                </ul>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" th:href="@{/products}">Produkty</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" th:href="@{/zones}">Strefy</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" th:href="@{/users}">Użytkownicy</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" th:href="@{/login}">Logowanie</a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" th:href="@{/register}">Rejestracja</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:href="@{/logout}">Wyloguj się</a>
+                </li>
+            </ul>
             </div>
-        </div>
+          </div>
     </nav>
-
-    <div class="container">
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <h1>Strefy magazynowe</h1>
+<div class="container-fluid px-4 py-4">
+        <div class="row align-items-center mb-4">
+            <div class="col">
+                <h1 class="display-6 fw-bold">Strefy magazynowe</h1>
             </div>
-            <div class="col-md-6 text-end">
-                <a href="/zones/add" class="btn btn-primary">
-                    <i class="bi bi-plus"></i> Dodaj nową strefę
+            <div class="col-auto">
+                <a href="/zones/add" class="btn btn-primary btn-2g">
+                    <i class="bi bi-plus-circle me-3"></i> Dodaj nową strefę
                 </a>
             </div>
         </div>
@@ -79,7 +97,7 @@
                                 </a>
                                 <a th:href="@{/zones/removeProduct/{id}(id=${zone.id})}"
                                    class="btn btn-sm btn-danger">
-                                    <i class="bi bi-plus-circle"></i> Usuń produkt
+                                    <i class="bi bi-dash-circle"></i> Usuń produkt
                                 </a>
 
                                 <div class="btn-group" role="group">
@@ -107,10 +125,7 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

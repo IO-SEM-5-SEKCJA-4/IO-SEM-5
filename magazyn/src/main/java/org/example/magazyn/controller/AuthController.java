@@ -51,7 +51,7 @@ public class AuthController {
         User existingUser = userService.findUserByEmail(userDto.getEmail());
 
         if (existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()) {
-            result.rejectValue("email", null,
+            result.rejectValue("email", "duplicate.email",
                     "There is already an account registered with the same email");
         }
 
@@ -61,7 +61,7 @@ public class AuthController {
         }
 
         userService.saveUser(userDto);
-        return "redirect:/register?success";
+        return "redirect:/login?registrationSuccess";
     }
     @GetMapping("/users")
     public String users(Model model){
