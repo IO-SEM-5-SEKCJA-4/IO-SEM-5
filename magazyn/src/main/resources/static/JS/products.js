@@ -6,8 +6,11 @@ function filterProducts() {
     Array.from(products).forEach(product => {
         const productName = product.getAttribute('data-product-name').toLowerCase();
         const productCategory = product.getAttribute('data-product-category').toLowerCase();
+        const productBrand = product.getAttribute('data-product-brand').toLowerCase();
         
-        if (productName.includes(filter) || productCategory.includes(filter)) {
+        if (productName.includes(filter) || 
+            productCategory.includes(filter) || 
+            productBrand.includes(filter)) {
             product.style.display = '';
         } else {
             product.style.display = 'none';
@@ -30,8 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
         products.forEach(product => {
             const productName = product.getAttribute('data-product-name').toLowerCase();
             const productCategory = product.getAttribute('data-product-category').toLowerCase();
+            const productBrand = product.getAttribute('data-product-brand').toLowerCase();
             
-            if (productName.includes(searchFilter) || productCategory.includes(searchFilter)) {
+            if (productName.includes(searchFilter) || 
+                productCategory.includes(searchFilter) || 
+                productBrand.includes(searchFilter)) {
                 product.style.display = '';
             } else {
                 product.style.display = 'none';
