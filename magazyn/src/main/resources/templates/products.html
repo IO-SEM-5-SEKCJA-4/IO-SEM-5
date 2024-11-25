@@ -85,6 +85,7 @@
         <div class="col product-item" 
             th:each="product : ${products}" 
             th:data-product-name="${product.name.toLowerCase()}"
+            th:data-product-category="${product.category.toLowerCase()}"
             th:data-product-price="${product.price}">
             <div class="card h-100 shadow-sm border-0">
                 <div class="card-body">

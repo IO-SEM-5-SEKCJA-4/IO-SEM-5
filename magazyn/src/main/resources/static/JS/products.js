@@ -2,9 +2,12 @@ function filterProducts() {
     const searchInput = document.getElementById('searchInput');
     const filter = searchInput.value.toLowerCase();
     const products = document.getElementsByClassName('product-item');
+    
     Array.from(products).forEach(product => {
-        const productName = product.getAttribute('data-product-name');
-        if (productName.includes(filter)) {
+        const productName = product.getAttribute('data-product-name').toLowerCase();
+        const productCategory = product.getAttribute('data-product-category').toLowerCase();
+        
+        if (productName.includes(filter) || productCategory.includes(filter)) {
             product.style.display = '';
         } else {
             product.style.display = 'none';
@@ -25,8 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const products = Array.from(document.getElementsByClassName('product-item'));
 
         products.forEach(product => {
-            const productName = product.getAttribute('data-product-name');
-            if (productName.includes(searchFilter)) {
+            const productName = product.getAttribute('data-product-name').toLowerCase();
+            const productCategory = product.getAttribute('data-product-category').toLowerCase();
+            
+            if (productName.includes(searchFilter) || productCategory.includes(searchFilter)) {
                 product.style.display = '';
             } else {
                 product.style.display = 'none';
