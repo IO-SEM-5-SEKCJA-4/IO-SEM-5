@@ -40,8 +40,9 @@ public class SpringSecurity implements WebMvcConfigurer{
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/", "/login", "/register/**").permitAll()
                         .requestMatchers("/products").hasAnyRole("USER", "WAREHOUSEMAN", "MANAGER", "ADMIN")
-                        .requestMatchers("/products/add/**", "/products/edit/**", "/products/delete/**").hasAnyRole("ADMIN", "WAREHOUSEMAN", "MANAGER")
+                        .requestMatchers("/products/add/**", "/products/edit/**", "/products/delete/**", "/products/reserve/**").hasAnyRole("ADMIN", "WAREHOUSEMAN", "MANAGER")
                         .requestMatchers("/zones", "/zones/add/**", "/zones/edit/**", "/zones/delete/", "/zones/details/**", "/zones/assignProduct/**", "/zones/removeProduct/**").hasAnyRole("ADMIN", "WAREHOUSEMAN", "MANAGER")
+                        .requestMatchers("/reservations").hasAnyRole("ADMIN", "WAREHOUSEMAN", "MANAGER")
                         .requestMatchers("/users", "/updateRoles").hasAnyRole("ADMIN", "MANAGER")
                         .requestMatchers("/magazyn/uploads/**").permitAll()
                         .anyRequest().authenticated()
@@ -56,17 +57,15 @@ public class SpringSecurity implements WebMvcConfigurer{
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .permitAll()
                 )
-				.csrf(csrf -> csrf.disable())
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.sendRedirect("/login");
+                        })
+                )
                 .userDetailsService(userDetailsService);
 
         return http.build();
     }
-
-	@Bean
-	public WebSecurityCustomizer webSecurityCustomizer() {
-		return (web) -> web.ignoring()
-			.requestMatchers("/magazyn/uploads/**");
-	}
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
