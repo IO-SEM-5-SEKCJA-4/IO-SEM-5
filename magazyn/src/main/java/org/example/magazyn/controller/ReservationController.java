@@ -64,20 +64,30 @@ public class ReservationController {
     }
 
     @PostMapping("/reservations/update-status/{id}")
-    @ResponseBody
     public ResponseEntity<Map<String, Object>> updateReservationStatus(
             @PathVariable Long id,
-            @RequestBody Map<String, String> payload
+            @RequestBody Map<String, String> payload,
+            Principal principal
     ) {
         try {
+            // Log the incoming request details
+            System.out.println("Updating reservation status for ID: " + id);
+            System.out.println("Payload status: " + payload.get("status"));
+            System.out.println("User: " + principal.getName());
+
+            // Find the current user
+            User currentUser = userRepository.findByEmail(principal.getName());
+
             Reservation.ReservationStatus status =
                     Reservation.ReservationStatus.valueOf(payload.get("status"));
 
             reservationService.updateReservationStatus(id, status);
 
             return ResponseEntity.ok(Map.of("message", "Status zaktualizowany"));
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(Map.of("error", "Nieprawidłowy status"));
+        } catch (Exception e) {
+            // Log the full exception for debugging
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(Map.of("error", "Błąd aktualizacji: " + e.getMessage()));
         }
     }
 
