@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dokument Magazynowy</title>
+    <link rel="stylesheet" href="../static/CSS/dokument-stylesheet.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Dokument Magazynowy</h1>
+        <p>Data wydruku: <span id="currentDate"></span></p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Podsumowanie strefy</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Nazwa strefy</th>
+              <th>Maks. pojemność (kg)</th>
+              <th>Aktualna waga (kg)</th>
+              <th>Ilość produktów</th>
+            </tr>
+          </thead>
+          <tbody id="zoneSummary">
+            <!-- Dane generowane dynamicznie -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Lista produktów</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Nazwa produktu</th>
+              <th>Rodzaj akcji</th>
+              <th>Ilość</th>
+            </tr>
+          </thead>
+          <tbody id="productList">
+            <!-- Dane generowane dynamicznie -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-print" onclick="window.print()">Drukuj</button>
+      </div>
+    </div>
+
+    <script
+      type="module"
+      src="../static/JS/example_of_using_Document.js"
+    ></script>
+  </body>
+</html>
