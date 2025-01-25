@@ -74,14 +74,19 @@
                 <td th:text="${reservation.quantity}"></td>
                 <td th:text="${#temporals.format(reservation.reservationDate, 'yyyy-MM-dd HH:mm')}"></td>
                 <td>
-                            <span class="badge"
-                                  th:classappend="${
-                                      reservation.status == T(org.example.magazyn.entity.Reservation.ReservationStatus).ACTIVE ? 'bg-warning' :
-                                      reservation.status == T(org.example.magazyn.entity.Reservation.ReservationStatus).COMPLETED ? 'bg-success' :
-                                      'bg-danger'
-                                  }"
-                                  th:text="${reservation.status}">
-                            </span>
+    <span class="badge"
+          th:classappend="${
+              reservation.status == T(org.example.magazyn.entity.Reservation.ReservationStatus).ACTIVE ? 'bg-warning' :
+              reservation.status == T(org.example.magazyn.entity.Reservation.ReservationStatus).COMPLETED ? 'bg-success' :
+              'bg-danger'
+          }"
+          th:text="${
+              reservation.status == T(org.example.magazyn.entity.Reservation.ReservationStatus).ACTIVE ? 'Aktywna' :
+              reservation.status == T(org.example.magazyn.entity.Reservation.ReservationStatus).COMPLETED ? 'Zakończona' :
+              reservation.status == T(org.example.magazyn.entity.Reservation.ReservationStatus).CANCELLED ? 'Anulowana' :
+              'Nieznany status'
+          }">
+    </span>
                 </td>
                 <td>
                     <div th:if="${reservation.status == T(org.example.magazyn.entity.Reservation.ReservationStatus).ACTIVE}">

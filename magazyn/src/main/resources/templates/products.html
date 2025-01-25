@@ -83,7 +83,7 @@
                         <h5 class="card-title mb-0" th:text="${product.name}"></h5>
                         <span class="badge"
                               th:classappend="${product.zone != null ? 'bg-primary' : 'bg-secondary'}"
-                              th:text="${product.zone != null ? product.zone.name : 'Unassigned'}">
+                              th:text="${product.zone != null ? product.zone.name : 'Nieprzypisane'}">
                         </span>
                     </div>
                     <div class="text-center mb-3">
@@ -94,19 +94,19 @@
                     </div>
                     <ul class="list-group list-group-flush mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="text-muted">Category</span>
+                            <span class="text-muted">Kategoria</span>
                             <strong th:text="${product.category}"></strong>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="text-muted">Price</span>
+                            <span class="text-muted">Cena</span>
                             <strong th:text="${product.price}"></strong>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="text-muted">Brand</span>
+                            <span class="text-muted">Marka</span>
                             <strong th:text="${product.brand}"></strong>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="text-muted">Quantity</span>
+                            <span class="text-muted">Ilość</span>
                             <strong th:text="${product.quantity}"></strong>
                         </li>
                     </ul>
