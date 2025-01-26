@@ -99,12 +99,7 @@
                             <span th:text="${user.email}"></span>
                         </td>
                         <td>
-    <span class="badge bg-primary role-badge"
-          th:text="${user.role == 'ROLE_ADMIN' ? 'Administrator' :
-                   user.role == 'ROLE_USER' ? 'Użytkownik' :
-                   user.role == 'ROLE_WAREHOUSEMAN' ? 'Magazynier' :
-                   user.role == 'ROLE_MANAGER' ? 'Menedżer': 'Nieznana rola'}">
-    </span>
+                            <span th:text="${#strings.replace(user.role, 'ROLE_', '')}" class="badge bg-primary role-badge"></span>
                         </td>
                         <td>
                             <button type="button"
@@ -139,25 +134,25 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="roles" value="ROLE_USER" id="roleUser">
                                 <label class="form-check-label" for="roleUser">
-                                    <i class="bi bi-person me-2"></i>Użytkownik
+                                    <i class="bi bi-person me-2"></i>User
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="roles" value="ROLE_ADMIN" id="roleAdmin">
                                 <label class="form-check-label" for="roleAdmin">
-                                    <i class="bi bi-shield-fill me-2"></i>Administrator
+                                    <i class="bi bi-shield-fill me-2"></i>Admin
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="roles" value="ROLE_WAREHOUSEMAN" id="roleWarehouseman">
                                 <label class="form-check-label" for="roleWarehouseman">
-                                    <i class="bi bi-box-seam me-2"></i>Magazynier
+                                    <i class="bi bi-box-seam me-2"></i>Warehouseman
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="roles" value="ROLE_MANAGER" id="roleManager">
                                 <label class="form-check-label" for="roleManager">
-                                    <i class="bi bi-briefcase me-2"></i>Menedżer
+                                    <i class="bi bi-briefcase me-2"></i>Manager
                                 </label>
                             </div>
                         </div>
